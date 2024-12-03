@@ -1,0 +1,9 @@
+
+Flask
+Requests
+BeautifulSoup4
+'Sentence Transformers'
+Torch
+os
+json
+math
