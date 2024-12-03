@@ -16,7 +16,7 @@ def index():
         articles_content = [extract_article_content(url) for url in articles_urls]
         
         # Perform NLP analysis
-        similarity_scores = calculate_similarity(user_text, articles_content)
+        similarity_scores = (calculate_similarity(user_text, articles_content))
         classification = classify_fake_news(similarity_scores)
         
         # Save results

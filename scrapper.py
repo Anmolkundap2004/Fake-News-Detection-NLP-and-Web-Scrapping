@@ -35,3 +35,4 @@ def extract_article_content(url):
         return content
     except Exception as e:
         return ""
+    
