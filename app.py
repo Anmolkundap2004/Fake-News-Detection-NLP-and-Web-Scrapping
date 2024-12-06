@@ -5,23 +5,28 @@ from storage import save_result
 
 app = Flask(__name__)
 
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
         # Get user input
         user_text = request.form["news_input"]
-        
+        print("user_text:",user_text)
+
         # Scrape articles
         articles_urls = scrape_articles(user_text)
+        print("\nArticle URL:",articles_urls)
         articles_content = [extract_article_content(url) for url in articles_urls]
+        print(articles_content)
         
         # Perform NLP analysis
-        similarity_scores = (calculate_similarity(user_text, articles_content))
+        similarity_scores = calculate_similarity(user_text, articles_content)
+        print(similarity_scores)
         classification = classify_fake_news(similarity_scores)
+        print(classification)
         
         # Save results
-        save_result(user_text, classification, articles_urls)
-        
+        save_result(user_text, classification, articles_urls)        
         # Return results
         return render_template("index.html", result=classification, articles=articles_urls)
     

@@ -1,0 +1,63 @@
+@startuml
+skinparam backgroundColor #fefefe
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam arrowColor #336699
+skinparam packageTitleFontSize 16
+skinparam packageTitleFontColor #ffffff
+skinparam packageTitleBackgroundColor #336699
+
+package "User Interface" as UI {
+  component "Input Form\n(User Input)" as Form #lightblue
+}
+
+package "Flask Web Application" as FlaskApp {
+  component "Request Handling" as Request #lightyellow
+  component "Routing" as Routing #lightyellow
+}
+
+package "Web Scraping Module" as Scraper {
+  component "Article Scraper" as ArticleScraper #lightgreen
+  component "Content Extractor" as ContentExtractor #lightgreen
+}
+
+package "Data Processing Module" as DataProcessing {
+  component "Data Cleaning" as Cleaning #lightpink
+  component "Preprocessing" as Preprocessing #lightpink
+}
+
+package "NLP Analysis Module" as NLP {
+  component "Similarity Calculation" as Similarity #lightgray
+  component "Fake News Classification" as Classification #lightgray
+}
+
+package "Storage" as Storage {
+  component "Scraped Data" as ScrapedData #lightpurple
+  component "Results" as Results #lightpurple
+}
+
+package "Fact-Checking Module" as FactCheck {
+  component "Cross-Reference" as CrossReference #lightorange
+  component "Credibility Check" as CredibilityCheck #lightorange
+}
+
+package "Result Display" as ResultDisplay {
+  component "Final Output" as Output #lightcyan
+}
+
+Form --> Request: User Input
+Request --> ArticleScraper: Query
+ArticleScraper --> ContentExtractor: Scraped Links
+ContentExtractor --> Cleaning: Raw Data
+Cleaning --> Preprocessing: Cleaned Data
+Preprocessing --> Similarity: Preprocessed Text
+Similarity --> Classification: Similarity Scores
+Classification --> CrossReference: Classified Results
+CrossReference --> CredibilityCheck: Verification
+CredibilityCheck --> Results: Store Final Data
+Results --> Output: Send Final Verdict
+Output --> Form: Display Results
+
+@enduml
+
+

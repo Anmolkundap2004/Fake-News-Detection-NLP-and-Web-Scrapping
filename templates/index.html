@@ -1,112 +1,115 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Fake News Detector</title>
-    <style>
-      body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #f4f4f4;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fake News Detector</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #f4f4f4;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-  .container {
-    width: 90%;
-    max-width: 800px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
+    .container {
+      width: 90%;
+      max-width: 800px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
 
-  h1 {
-    margin-bottom: 20px;
-    color: #0056b3;
-  }
+    h1 {
+      margin-bottom: 20px;
+      color: #0056b3;
+    }
 
-  form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    margin-bottom: 20px;
-    resize: none;
-  }
+    form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      resize: none;
+    }
 
-  form button {
-    background-color: #0056b3;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
+    form button {
+      background-color: #0056b3;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
 
-  form button:hover {
-    background-color: #004494;
-  }
+    form button:hover {
+      background-color: #004494;
+    }
 
-  h2 {
-    margin-top: 20px;
-    color: #28a745;
-  }
+    h2 {
+      margin-top: 20px;
+      color: #28a745;
+    }
 
-  h3 {
-    margin-top: 20px;
-    color: #333;
-  }
+    h3 {
+      margin-top: 20px;
+      color: #333;
+    }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
 
-  ul li {
-    margin: 10px 0;
-  }
+    ul li {
+      margin: 10px 0;
+    }
 
-  ul li a {
-    color: #0056b3;
-    text-decoration: none;
-  }
+    ul li a {
+      color: #0056b3;
+      text-decoration: none;
+      word-break: break-word;
+    }
 
-  ul li a:hover {
-    text-decoration: underline;
-  }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Fake News Detector</h1>
-      <form method="POST">
-        <textarea
-          name="news_input"
-          placeholder="Enter news text here"
-          rows="6"
-        ></textarea>
-        <br />
-        <button type="submit">Check</button>
-      </form>
+    ul li a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Fake News Detector</h1>
+    <form method="POST">
+      <textarea
+        name="news_input"
+        placeholder="Enter news text here"
+        rows="6"
+        required
+      ></textarea>
+      <br />
+      <button type="submit">Check</button>
+    </form>
 
-      {% if result %}
+    {% if result %}
       <h2>Result: {{ result }}</h2>
-      <h3>Scraped Articles:</h3>
+      <!-- <h3>Scraped Articles:</h3>
       <ul>
         {% for article in articles %}
-        <li><a href="{{ article }}" target="_blank">{{ article }}</a></li>
+          <li><a href="{{ article }}" target="_blank">{{ article }}</a></li>
         {% endfor %}
-      </ul>
-      {% endif %}
-    </div>
-    
-  </body>
+      </ul> -->
+    {% endif %}
+  </div>
+</body>
 </html>

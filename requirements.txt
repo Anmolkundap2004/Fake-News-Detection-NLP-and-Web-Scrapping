@@ -1,9 +1,8 @@
-
 Flask
 Requests
 BeautifulSoup4
-'Sentence Transformers'
-Torch
-os
-json
-math
+sentence-transformers
+torch
+bs4
+newspaper3k
+

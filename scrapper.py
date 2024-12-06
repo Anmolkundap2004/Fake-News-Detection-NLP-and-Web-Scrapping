@@ -1,38 +1,67 @@
 import requests
+from newspaper import Article
 from bs4 import BeautifulSoup
 
-def scrape_articles(query, num_articles=3):
+def scrape_articles(query, num_results=10):
     """
-    Scrapes related news articles from Google News.
+    Fetch search results using the Google Custom Search API (replace this with API integration).
+    
+    Args:
+    - query (str): The search query.
+    - num_results (int): Number of results to fetch.
+
+    Returns:
+    - urls (list): A list of URLs from search results.
     """
+    # Placeholder: Replace with Google Custom Search JSON API
     query = query.replace(" ", "+")
-    url = f"https://www.google.com/search?q={query}+site:reuters.com"
+    # News domains to scrape from
+    domains = [
+        "bbc.com", "cnn.com", "nytimes.com", "reuters.com", 
+        "foxnews.com", "theguardian.com", "washingtonpost.com", 
+        "forbes.com", "aljazeera.com", "bloomberg.com", "news18.com"
+    ]
+    urls = []
+
     headers = {"User-Agent": "Mozilla/5.0"}
-    
-    response = requests.get(url, headers=headers)
-    soup = BeautifulSoup(response.text, "html.parser")
-    
-    articles = []
-    for link in soup.find_all("a", href=True):
-        href = link['href']
-        if "reuters.com" in href:
-            full_link = href.split("&")[0]
-            articles.append(full_link.replace("/url?q=", ""))
-            if len(articles) >= num_articles:
+    for domain in domains:
+        try:
+            search_url = f"https://www.google.com/search?q={query}+site:{domain}"
+            response = requests.get(search_url, headers=headers)
+            soup = BeautifulSoup(response.text, "html.parser")
+            
+            for link in soup.find_all("a", href=True):
+                href = link['href']
+                if domain in href:
+                    clean_link = href.split("&")[0].replace("/url?q=", "")
+                    urls.append(clean_link)
+                    if len(urls) >= num_results:
+                        break
+            if len(urls) >= num_results:
                 break
-    
-    return articles
+        except Exception as e:
+            print(f"Error with domain {domain}: {e}")
+    return urls
+
+
 
 def extract_article_content(url):
     """
-    Extracts article content from a given URL.
+    Extracts the main content of a news article.
+    
+    Args:
+    - url (str): The URL of the article.
+    
+    Returns:
+    - content (str): The main text of the article.
     """
     try:
-        response = requests.get(url)
-        soup = BeautifulSoup(response.text, "html.parser")
-        paragraphs = soup.find_all('p')
-        content = " ".join([p.get_text() for p in paragraphs])
-        return content
+        article = Article(url)
+        article.download()
+        article.parse()
+        
+        return article.text
     except Exception as e:
+        print(f"Error extracting content from {url}: {e}")
         return ""
-    
+
